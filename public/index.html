@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent World - Claude Code Visualizer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Left Panel: Active Agents -->
+    <div id="left-panel" class="side-panel">
+      <div class="panel-header" id="left-toggle">
+        <span class="panel-arrow">◀</span>
+        <span>ACTIVE AGENTS</span>
+      </div>
+      <div class="panel-body" id="left-body">
+        <div id="agent-list" class="panel-scroll"></div>
+      </div>
+    </div>
+
+    <!-- Center: Game Screen -->
+    <div id="center">
+      <div id="screen">
+        <canvas id="game" width="768" height="576"></canvas>
+        <div id="overlay">
+          <div id="title-bar">AGENT WORLD</div>
+          <div id="agent-count">AGENTS: 0</div>
+        </div>
+        <div id="info-panel" class="hidden">
+          <div id="info-name"></div>
+          <div id="info-type"></div>
+          <div id="info-task"></div>
+          <div id="info-thoughts"></div>
+          <div id="info-status"></div>
+        </div>
+      </div>
+      <div id="controls">
+        <span>[D] Demo</span>
+        <span>[Tab] Cycle</span>
+        <span>[P] Pokedex</span>
+        <span>[B] Badges</span>
+        <span>[F] Stats</span>
+        <span>[T] Timeline</span>
+        <span>[M] Mute</span>
+        <span>[1/2] Panels</span>
+        <button id="clear-all-btn" type="button" title="Wipe every agent and clear history (Shift+R)">CLEAR ALL</button>
+      </div>
+    </div>
+
+    <!-- Right Panel: History -->
+    <div id="right-panel" class="side-panel">
+      <div class="panel-header" id="right-toggle">
+        <span>HISTORY</span>
+        <span class="panel-arrow">▶</span>
+      </div>
+      <div class="panel-body" id="right-body">
+        <div id="history-list" class="panel-scroll"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
