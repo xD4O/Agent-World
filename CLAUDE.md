@@ -62,7 +62,8 @@ Add to a Claude Code config: `claude mcp add --transport http agent-world http:/
 ## Key Behaviors
 - Agents spawn at the Pokemon Center and pathfind to their building
 - While working/thinking, agents **pace back and forth** in front of their building
-- When marked done, agents walk back to the Pokemon Center
+- When marked done, agents walk back to the Pokemon Center and **linger there indefinitely**. They do NOT auto-despawn — completed work waits for the user to acknowledge it.
+- A done agent is dismissed in two ways: (a) click the agent and press the green pulsing **DISMISS ✓** button in the info panel, or (b) refresh the page — every fresh WebSocket connect purges all `done` agents server-side via `store.clearDone()` in `server.js`
 - Test-runner agents can trigger a Pokemon battle scene (click on them or the Battle Arena)
 - Professor Oak NPC wanders the town and narrates events with speech bubbles
 

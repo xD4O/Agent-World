@@ -63,6 +63,8 @@ Press **D** in the browser to launch a full demo with 5 agents, status updates, 
 
 > **The world always starts empty.** `data/agents.json` is wiped at boot and never auto-loaded — only real agents that connect via REST or MCP appear in the world. To wipe a running session use the **CLEAR ALL** button (or **Shift+R**), which also clears the persistent event history.
 
+> **Done agents linger.** Once an agent is marked complete, it walks back to the Pokemon Center and stays there until you acknowledge it. Click the agent and press the green pulsing **DISMISS ✓** button in the info panel to remove it, or just refresh the page — completed agents are purged automatically on every fresh page load.
+
 ## Controls
 
 | Key | Action |

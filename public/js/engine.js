@@ -68,6 +68,10 @@ export class Engine {
     const clearBtn = document.getElementById('clear-all-btn');
     if (clearBtn) clearBtn.addEventListener('click', () => this.clearAll());
 
+    // Wire single-agent DISMISS button (visible only for done agents)
+    const dismissBtn = document.getElementById('info-dismiss-btn');
+    if (dismissBtn) dismissBtn.addEventListener('click', () => this.dismissSelected());
+
     // State
     this.paused = false;
     this.lastTime = 0;
@@ -325,8 +329,29 @@ export class Engine {
     statusEl.textContent = agent.progress > 0 ? `${agent.status} (${agent.progress}%)` : agent.status;
     statusEl.className = agent.status;
 
+    const dismissBtn = document.getElementById('info-dismiss-btn');
+    if (dismissBtn) dismissBtn.classList.toggle('hidden', agent.status !== 'done');
+
     const header = `${agent.shortId} [${agent.type.toUpperCase()}]`;
     this.dialog.show(header, agent.task || 'Waiting for assignment...', statusColors[agent.status]);
+  }
+
+  // Dismiss the currently-selected done agent. The DELETE call broadcasts an
+  // agent_remove event, so all connected browsers see the despawn.
+  async dismissSelected() {
+    const id = this.agents.selectedId;
+    if (!id) return;
+    const agent = this.agents.getAgent(id);
+    if (!agent || agent.status !== 'done') return;
+    try {
+      const res = await fetch(`/api/agents/${encodeURIComponent(id)}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    } catch (e) {
+      console.error('[dismiss] failed:', e);
+      return;
+    }
+    this.hideInfoPanel();
+    this.dialog.hide();
   }
 
   hideInfoPanel() {

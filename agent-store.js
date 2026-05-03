@@ -136,6 +136,23 @@ function clearAll() {
   return count;
 }
 
+// Drop every agent in 'done' status. Used when a fresh WS client connects
+// (page refresh) so completed work doesn't accumulate forever. Each removal
+// is broadcast so any other connected browsers see the agents despawn live.
+function clearDone() {
+  const ids = [...agents.values()].filter(a => a.status === 'done').map(a => a.id);
+  for (const id of ids) {
+    agents.delete(id);
+    emit({ type: 'agent_remove', data: { id } });
+    logEvent('remove', { id, reason: 'done-cleanup' });
+  }
+  if (ids.length) {
+    persist();
+    console.log(`[~] Cleared ${ids.length} done agent(s) on fresh connection`);
+  }
+  return ids.length;
+}
+
 module.exports = {
   list,
   get,
@@ -144,6 +161,7 @@ module.exports = {
   addThought,
   remove,
   clearAll,
+  clearDone,
   onChange,
   VALID_STATUSES,
   KNOWN_TYPES,

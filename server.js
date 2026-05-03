@@ -85,8 +85,11 @@ app.delete('/api/agents', (req, res) => {
 });
 
 // WebSocket: push initial state, then forward all store changes.
+// Each fresh connection (e.g. a browser page refresh) purges any 'done' agents
+// first — completed work lingers visually but doesn't survive a page reload.
 wss.on('connection', (ws) => {
   console.log('[ws] Client connected');
+  store.clearDone();
   ws.send(JSON.stringify({ type: 'init', data: store.list() }));
   ws.on('close', () => console.log('[ws] Client disconnected'));
 });
