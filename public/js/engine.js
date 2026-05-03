@@ -64,9 +64,9 @@ export class Engine {
       }
     };
 
-    // Wire Clear All button
+    // Wire CLEAR DONE button
     const clearBtn = document.getElementById('clear-all-btn');
-    if (clearBtn) clearBtn.addEventListener('click', () => this.clearAll());
+    if (clearBtn) clearBtn.addEventListener('click', () => this.clearDone());
 
     // Wire single-agent DISMISS button (visible only for done agents)
     const dismissBtn = document.getElementById('info-dismiss-btn');
@@ -206,7 +206,7 @@ export class Engine {
       switch (key) {
         case 'd': this.runDemo(); break;
         case 'r':
-          if (e.shiftKey) { this.clearAll(); }
+          if (e.shiftKey) { this.clearDone(); }
           else { this.reset(); }
           break;
         case 'm':
@@ -489,19 +489,20 @@ export class Engine {
     this.updateAgentCount();
   }
 
-  // Hard reset: wipe server state + history, then reload the page.
-  // Triggered by the Clear All button or Shift+R.
-  async clearAll() {
-    if (!confirm('Clear ALL agents and history? This cannot be undone.')) return;
+  // Bulk-remove every completed (done) agent. Active agents
+  // (walking/working/thinking/idle) are left alone. Triggered by the
+  // CLEAR DONE button or Shift+R. The server broadcasts an agent_remove for
+  // each cleared agent, so the despawn animation runs naturally for everyone
+  // — no page reload needed.
+  async clearDone() {
     try {
       const res = await fetch('/api/agents', { method: 'DELETE' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const { removed = 0 } = await res.json().catch(() => ({}));
+      console.log(`[clear-done] removed ${removed} completed agent(s)`);
     } catch (e) {
-      alert(`Failed to clear: ${e.message}`);
-      return;
+      console.error('[clear-done] failed:', e);
     }
-    this.panels.clearHistory();
-    location.reload();
   }
 
   // Pushed by the server when another client clears the world. Resync without reloading.

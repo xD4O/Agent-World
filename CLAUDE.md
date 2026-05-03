@@ -35,7 +35,7 @@ A web application that visualizes Claude Code's agentic workflows as a Pokemon G
 - `POST /api/agents` - Create agent `{id, type, task, thoughts?, progress?}`
 - `PUT /api/agents/:id` - Update agent `{status, task, thoughts, progress}`
 - `DELETE /api/agents/:id` - Remove agent
-- `DELETE /api/agents` - Wipe all agents + truncate event log (broadcasts `world_clear` over WS)
+- `DELETE /api/agents` - Remove every completed (status=done) agent; active agents are kept. Broadcasts `agent_remove` per cleared agent. (For nuclear "wipe everything" use the MCP `clear_world` tool.)
 - `POST /api/agents/:id/thought` - Add thought `{text}`
 - `GET /api/agents` - List all agents
 - Valid statuses: `walking`, `working`, `thinking`, `done`, `idle`
@@ -81,7 +81,7 @@ Add to a Claude Code config: `claude mcp add --transport http agent-world http:/
 | M | Mute sound + music |
 | Space | Pause/unpause |
 | R | Reset rendered agents locally (server state untouched) |
-| Shift+R | **Clear All** — wipe server agents + history, then reload page (also via "CLEAR ALL" button) |
+| Shift+R | **Clear Done** — remove every completed agent (active agents kept; same as the "CLEAR DONE ✓" button) |
 | Esc | Close overlays |
 
 ## Claude Code Integration

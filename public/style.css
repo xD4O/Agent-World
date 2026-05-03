@@ -327,10 +327,10 @@ body {
 
 #clear-all-btn {
   padding: 3px 10px;
-  border: 1px solid #802020;
+  border: 1px solid #4a8a4a;
   border-radius: 3px;
-  background: #1a0808;
-  color: #e88080;
+  background: #0d2010;
+  color: #b0e0a0;
   font: inherit;
   font-size: 10px;
   letter-spacing: 1px;
@@ -339,13 +339,13 @@ body {
 }
 
 #clear-all-btn:hover {
-  background: #401010;
-  color: #ffb0b0;
-  border-color: #c04040;
+  background: #1c3820;
+  color: #d8ffc8;
+  border-color: #80c080;
 }
 
 #clear-all-btn:active {
-  background: #200808;
+  background: #061008;
 }
 
 #info-dismiss-btn.hidden { display: none; }

@@ -78,9 +78,11 @@ app.delete('/api/agents/:id', (req, res) => {
   }
 });
 
-// Wipe every agent + the event log. Used by the "Clear All" UI button.
+// Used by the "CLEAR DONE" UI button. Removes only agents whose status is
+// 'done'; in-flight work (walking/working/thinking/idle) is left untouched.
+// For the nuclear "wipe everything" option, use the MCP `clear_world` tool.
 app.delete('/api/agents', (req, res) => {
-  const removed = store.clearAll();
+  const removed = store.clearDone();
   res.json({ ok: true, removed });
 });
 

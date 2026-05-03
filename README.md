@@ -63,7 +63,10 @@ Press **D** in the browser to launch a full demo with 5 agents, status updates, 
 
 > **The world always starts empty.** `data/agents.json` is wiped at boot and never auto-loaded — only real agents that connect via REST or MCP appear in the world. To wipe a running session use the **CLEAR ALL** button (or **Shift+R**), which also clears the persistent event history.
 
-> **Done agents linger.** Once an agent is marked complete, it walks back to the Pokemon Center and stays there until you acknowledge it. Click the agent and press the green pulsing **DISMISS ✓** button in the info panel to remove it, or just refresh the page — completed agents are purged automatically on every fresh page load.
+> **Done agents linger.** Once an agent is marked complete, it walks back to the Pokemon Center and stays there until you acknowledge it. Three ways to clear them:
+> - Click an agent → green pulsing **DISMISS ✓** button in the info panel (single agent)
+> - Click the **CLEAR DONE ✓** button or press **Shift+R** (every completed agent at once; active agents are kept)
+> - Refresh the page — done agents are purged automatically on every fresh page load
 
 ## Controls
 
@@ -80,7 +83,7 @@ Press **D** in the browser to launch a full demo with 5 agents, status updates, 
 | `M` | Mute sound + music |
 | `Space` | Pause / unpause |
 | `R` | Reset rendered agents locally (server state untouched) |
-| `Shift+R` | **Clear All** — wipe server agents + history, reload the page |
+| `Shift+R` | **Clear Done** — remove every completed agent (active agents kept) |
 | `Esc` | Close overlays |
 | `Arrow Keys` | Scrub timeline (when open) |
 | `Up/Down` | Navigate Pokedex entries (when open) |
@@ -231,7 +234,7 @@ curl -X DELETE http://localhost:3333/api/agents/my-agent
 | `PUT` | `/api/agents/:id` | `{status?, task?, thoughts?, progress?, type?}` | Update agent |
 | `POST` | `/api/agents/:id/thought` | `{text}` | Add thought (sets status to thinking) |
 | `DELETE` | `/api/agents/:id` | - | Remove agent |
-| `DELETE` | `/api/agents` | - | Wipe every agent and clear the event log |
+| `DELETE` | `/api/agents` | - | Remove every completed (status=done) agent. Active agents are kept |
 
 **Valid statuses:** `walking`, `working`, `thinking`, `done`, `idle`
 **Progress:** `0-100` (renders as HP-style bar)
