@@ -1,6 +1,6 @@
 # Agent World
 
-A Pokemon Gameboy Color-style web application that visualizes Claude Code's agentic workflows in real-time. Watch your subagents come to life as pixel-art trainers navigating a charming tile-based town, pacing back and forth at their work stations, battling bugs, and earning gym badges.
+A Pokemon Gameboy Color-style web application that visualizes Hermes, Codexs, and Claude Code's agentic workflows in real-time. Watch your subagents come to life as pixel-art trainers navigating a charming tile-based town, pacing back and forth at their work stations, battling bugs, and earning gym badges.
 
 ```
   ╔══════════════════════════════════════╗
@@ -245,3 +245,5 @@ agent-world/
 **17 JS modules, ~5000 lines, zero build step, all pixel art procedural.**
 
 All sprites are defined programmatically as pixel arrays - no external image assets needed. The canvas renders at 768x576 native (2x GBC resolution) and CSS scales with `image-rendering: pixelated` for crisp pixels.
+
+Built with Claude Code and Kimi K2.6
