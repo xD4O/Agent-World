@@ -127,13 +127,41 @@ Add to your Claude Code or Claude Desktop config:
 }
 ```
 
-In Claude Code you can also wire it via CLI:
+Or wire it up via CLI from whichever agent you use:
 
+**Claude Code**
 ```bash
 claude mcp add --transport http agent-world http://localhost:3333/mcp
+claude mcp list                              # confirm
 ```
 
-Multiple agents can connect to the same server simultaneously — every connection sees the same shared world. Each tool call mutates the shared agent store and broadcasts to the browser over WebSocket.
+**Hermes Agent**
+```bash
+hermes mcp add agent-world --url http://localhost:3333/mcp
+hermes mcp test agent-world                  # confirm Hermes can reach it
+hermes mcp list                              # show all servers
+```
+
+You can also edit `~/.hermes/config.yaml` directly and add:
+```yaml
+mcp_servers:
+  agent-world:
+    url: http://localhost:3333/mcp
+```
+
+**OpenAI Codex CLI**
+```bash
+codex mcp add agent-world --url http://localhost:3333/mcp
+codex mcp list                               # confirm
+```
+
+Or edit `~/.codex/config.toml` directly:
+```toml
+[mcp_servers.agent-world]
+url = "http://localhost:3333/mcp"
+```
+
+Multiple agents can connect to the same server simultaneously — Claude Code, Hermes, and Codex can all share one world at once. Every connection sees the same shared agent store, and each tool call broadcasts to the browser over WebSocket.
 
 #### MCP Tools
 
