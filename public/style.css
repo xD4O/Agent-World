@@ -350,6 +350,36 @@ body {
 
 #info-dismiss-btn.hidden { display: none; }
 
+#history-actions {
+  padding: 6px 8px;
+  border-bottom: 1px solid #2a2a35;
+  background: #14141c;
+}
+
+#clear-history-btn {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #404050;
+  border-radius: 3px;
+  background: #1a1a24;
+  color: #888;
+  font: inherit;
+  font-family: inherit;
+  font-size: 9px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+#clear-history-btn:hover {
+  background: #2a1818;
+  color: #e88080;
+  border-color: #802020;
+}
+
+#clear-history-btn:active {
+  background: #100808;
+}
+
 #info-dismiss-btn {
   margin-top: 6px;
   padding: 4px 10px;

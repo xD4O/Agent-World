@@ -67,6 +67,8 @@ Press **D** in the browser to launch a full demo with 5 agents, status updates, 
 > - Click an agent → green pulsing **DISMISS ✓** button in the info panel (single agent)
 > - Click the **CLEAR DONE ✓** button or press **Shift+R** (every completed agent at once; active agents are kept)
 > - Refresh the page — done agents are purged automatically on every fresh page load
+>
+> **The right-side history panel** has its own **🗑 CLEAR HISTORY** button at the top. It only wipes the local history list (stored in localStorage) and doesn't touch any agents — useful for clearing visual clutter without affecting the world.
 
 ## Controls
 

@@ -72,6 +72,15 @@ export class Engine {
     const dismissBtn = document.getElementById('info-dismiss-btn');
     if (dismissBtn) dismissBtn.addEventListener('click', () => this.dismissSelected());
 
+    // Wire CLEAR HISTORY button (right-panel only — doesn't touch agents)
+    const clearHistoryBtn = document.getElementById('clear-history-btn');
+    if (clearHistoryBtn) {
+      clearHistoryBtn.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        this.panels.clearHistory();
+      });
+    }
+
     // State
     this.paused = false;
     this.lastTime = 0;
